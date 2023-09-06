@@ -221,32 +221,42 @@ class _MobileCategoriesState extends State<MobileCategories> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-              backgroundColor: const Color.fromARGB(253, 253, 253, 255),
-              title: const Center(child: Text('Select Battery Power')),
-              content: Container(
-                  height: 300,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Capacity',
-                        style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  color: Colors.grey,
-                                  // fontSize: 19,
-                                ),
-                      ),
-                      BatterySlider(
-                          maxValue: 6000,
-                          minValue: 0,
-                          value: selectedBatteryValue,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedBatteryValue = value;
-                            });
-                          }),
-                    ],
-                  )));
+            // actions: [
+            //   ElevatedButton(onPressed: (){}, child: const Text('Search'))
+            // ],
+            backgroundColor: const Color.fromARGB(253, 253, 253, 255),
+            title: const Text('Select Battery Range'),
+            content: SizedBox(
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Text(
+                      'Select a range From 0 to 6000',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Colors.black54,
+                            fontSize: 19,
+                          ),
+                    ),
+                  ),
+                  BatterySlider(
+                    maxValue: 6000,
+                    minValue: 0,
+                    value: selectedBatteryValue,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          selectedBatteryValue = value;
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       );
     }
@@ -436,14 +446,16 @@ class _MobileCategoriesState extends State<MobileCategories> {
                     _showBatteryDialog(context);
                   },
                 );
-              } else {
-                return FeatureItems(
-                  features: widget.features[index],
-                  onTap: () {
-                    // _showAndroidVersionsDialog(ctx);
-                  },
-                );
               }
+              return null;
+              // else {
+              //   return FeatureItems(
+              //     features: widget.features[index],
+              //     onTap: () {
+              //       // _showAndroidVersionsDialog(ctx);
+              //     },
+              //   );
+              // }
             },
             scrollDirection: Axis.horizontal,
           ),

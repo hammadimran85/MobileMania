@@ -1,3 +1,6 @@
+import 'package:aboutmobiles/data/dummy_data.dart';
+import 'package:aboutmobiles/screens/battery_range_mobile_details.dart';
+import 'package:aboutmobiles/screens/features_detail.dart';
 import 'package:flutter/material.dart';
 
 class BatterySlider extends StatefulWidget {
@@ -23,30 +26,42 @@ class _BatterySliderState extends State<BatterySlider> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        RangeSlider(
-          values: _currentRangeValues,
-          min: widget.minValue,
-          max: widget.maxValue,
-          divisions: ((widget.maxValue - widget.minValue) / 100).toInt(),
-          labels: RangeLabels(
-            _currentRangeValues.start.round().toString(),
-            _currentRangeValues.end.round().toString(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: RangeSlider(
+            values: _currentRangeValues,
+            min: widget.minValue,
+            max: widget.maxValue,
+            divisions: (widget.maxValue - widget.minValue) ~/ 100,
+            labels: RangeLabels(
+              _currentRangeValues.start.round().toString(),
+              _currentRangeValues.end.round().toString(),
+            ),
+            onChanged: (RangeValues values) {
+              setState(() {
+                _currentRangeValues = values;
+              });
+              widget.onChanged(
+                  values.end); // Only pass the end value to the parent widget
+            },
           ),
-          onChanged: (RangeValues values) {
-            setState(() {
-              _currentRangeValues = values;
-            });
-            widget.onChanged(
-                values.end); // Only pass the end value to the parent widget
-          },
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pop(_currentRangeValues
-                .end); // Pass selected value back to parent screen
+            Navigator.of(context)
+                .pop(); // Pass selected value back to parent screen
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => BatteryRangeMobileDetailsScreen(
+                    mobile: dummyMobiles,
+                    startingRange: _currentRangeValues.start,
+                    endingRange: _currentRangeValues.end),
+              ),
+            );
           },
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );
