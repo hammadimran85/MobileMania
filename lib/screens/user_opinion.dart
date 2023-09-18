@@ -16,49 +16,51 @@ class UserOpinion extends StatelessWidget {
       appBar: AppBar(
         title: const Text('User Opinions'),
       ),
-      body: Column(
-        children: [
-          SpecificationHeader(mobile: mobile),
-          Container(
-            height: 50,
-            width: double.infinity,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                    Theme.of(context).colorScheme.primary,
-                    Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                  ]),
-            ),
-            child: Text(
-              'Post Your Opinion',
-              maxLines: 1,
-              softWrap: true,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontSize: 22,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onPrimary
-                        .withOpacity(0.9),
-                    // fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 584,
-            child: ListView.builder(
-              itemCount: opinions.length,
-              itemBuilder: (ctx, index) => UserOpinionItems(
-                opinions: opinions[index],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SpecificationHeader(mobile: mobile),
+            Container(
+              height: 50,
+              width: double.infinity,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                    ]),
+              ),
+              child: Text(
+                'Post Your Opinion',
+                maxLines: 1,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontSize: 22,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onPrimary
+                          .withOpacity(0.9),
+                      // fontWeight: FontWeight.bold,
+                    ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 1000,
+              child: ListView.builder(
+                itemCount: opinions.length,
+                itemBuilder: (ctx, index) => UserOpinionItems(
+                  opinions: opinions[index],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
