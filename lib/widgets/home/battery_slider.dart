@@ -1,6 +1,5 @@
 import 'package:aboutmobiles/data/dummy_data.dart';
 import 'package:aboutmobiles/screens/battery_range_mobile_details.dart';
-import 'package:aboutmobiles/screens/features_detail.dart';
 import 'package:flutter/material.dart';
 
 class BatterySlider extends StatefulWidget {
