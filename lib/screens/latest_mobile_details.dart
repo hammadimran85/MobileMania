@@ -1,4 +1,4 @@
-import 'package:aboutmobiles/models/latest_mobiles.dart';
+import 'package:aboutmobiles/models/mobile.dart';
 import 'package:aboutmobiles/models/user_opinion_model.dart';
 import 'package:aboutmobiles/models/video_reviews.dart';
 import 'package:aboutmobiles/screens/user_opinion.dart';
@@ -15,7 +15,7 @@ class LatestMobileDetailsScreen extends StatelessWidget {
       required this.videos,
       required this.opinions});
 
-  final LatestMobiles mobile;
+  final Mobile mobile;
   final List<VideoReviews> videos;
   final List<UserOpinionModel> opinions;
 
@@ -66,7 +66,9 @@ class LatestMobileDetailsScreen extends StatelessWidget {
                             .withOpacity(0.8),
                       ),
                       Text(
-                        '${mobile.screenSize} inch',
+                        mobile.dimensions.length > 8
+                            ? mobile.dimensions.substring(0, 8)
+                            : mobile.dimensions,
                         maxLines: 1,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
@@ -93,7 +95,9 @@ class LatestMobileDetailsScreen extends StatelessWidget {
                             .withOpacity(0.8),
                       ),
                       Text(
-                        '${mobile.rearCameraPixels}MP',
+                        mobile.featuresOfCamera.length > 7
+                            ? mobile.featuresOfCamera.substring(0, 7)
+                            : mobile.featuresOfCamera,
                         maxLines: 1,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
@@ -117,7 +121,9 @@ class LatestMobileDetailsScreen extends StatelessWidget {
                         height: 40,
                       ),
                       Text(
-                        '${mobile.ram} GB',
+                        mobile.internalMemory.length > 8
+                            ? mobile.internalMemory.substring(0, 10)
+                            : mobile.internalMemory,
                         maxLines: 1,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,

@@ -4,13 +4,11 @@ class VideoReviews {
     required this.title,
     required this.videoUrl,
     required this.thumbnailUrl,
-    required this.phoneName,
-    required this.minutes,
+    required this.channelTitle,
   });
   final String id;
   final String title;
   final String videoUrl;
   final String thumbnailUrl;
-  final String phoneName;
-  final String minutes;
+  final String channelTitle;
 }

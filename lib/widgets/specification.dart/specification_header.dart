@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:aboutmobiles/models/latest_mobiles.dart';
+import 'package:aboutmobiles/models/mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:aboutmobiles/screens/image_view.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -7,10 +10,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class SpecificationHeader extends StatelessWidget {
   const SpecificationHeader({super.key, required this.mobile});
 
-  final LatestMobiles mobile;
+  final Mobile mobile;
 
   @override
   Widget build(BuildContext context) {
+    int randomNumber(int min, int max) {
+      final Random random = Random();
+      return min + random.nextInt(max - min + 1);
+    }
+
     return Container(
       height: 180,
       padding: const EdgeInsets.only(top: 5, bottom: 13),
@@ -43,7 +51,9 @@ class SpecificationHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${mobile.company} ${mobile.model}',
+                mobile.name.length > 15
+                    ? mobile.name.substring(0, 15)
+                    : mobile.name,
                 maxLines: 1,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
@@ -58,7 +68,7 @@ class SpecificationHeader extends StatelessWidget {
               ),
               const SizedBox(height: 7),
               RatingBar.builder(
-                initialRating: mobile.rating,
+                initialRating: randomNumber(0, 5).toDouble(),
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,

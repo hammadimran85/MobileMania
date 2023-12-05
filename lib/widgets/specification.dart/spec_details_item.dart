@@ -1,10 +1,10 @@
-import 'package:aboutmobiles/models/latest_mobiles.dart';
+import 'package:aboutmobiles/models/mobile.dart';
 import 'package:flutter/material.dart';
 
 class SpecDetailsItem extends StatelessWidget {
   const SpecDetailsItem({super.key, required this.mobile});
 
-  final LatestMobiles mobile;
+  final Mobile mobile;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class SpecDetailsItem extends StatelessWidget {
             children: [
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     right: BorderSide(color: Colors.black45, width: 1.0),
@@ -31,7 +32,7 @@ class SpecDetailsItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Rear Camera',
+                      'Camera',
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -45,7 +46,9 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.rearCameraPixels}MP',
+                      mobile.featuresOfCamera.length > 7
+                          ? mobile.featuresOfCamera.substring(0, 7)
+                          : mobile.featuresOfCamera,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -63,6 +66,7 @@ class SpecDetailsItem extends StatelessWidget {
               ),
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black45, width: 1.0),
@@ -78,7 +82,7 @@ class SpecDetailsItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Front Camera',
+                      'GPU',
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -92,7 +96,7 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.frontCameraPixels}MP',
+                      mobile.gpu,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -115,6 +119,7 @@ class SpecDetailsItem extends StatelessWidget {
             children: [
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     right: BorderSide(color: Colors.black45, width: 1.0),
@@ -144,7 +149,9 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.ram} GB',
+                      mobile.internalMemory.length > 6
+                          ? mobile.internalMemory.substring(0, 7)
+                          : mobile.internalMemory,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -162,6 +169,7 @@ class SpecDetailsItem extends StatelessWidget {
               ),
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black45, width: 1.0),
@@ -191,7 +199,10 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.memory} GB Built-in',
+                      mobile.internalMemory.length > 8 &&
+                              mobile.internalMemory.length < 15
+                          ? mobile.internalMemory.substring(8, 14)
+                          : mobile.internalMemory,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -214,6 +225,7 @@ class SpecDetailsItem extends StatelessWidget {
             children: [
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     right: BorderSide(color: Colors.black45, width: 1.0),
@@ -244,7 +256,7 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.screenSize} Inch',
+                      mobile.screenSize,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -262,6 +274,7 @@ class SpecDetailsItem extends StatelessWidget {
               ),
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black45, width: 1.0),
@@ -291,7 +304,9 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      mobile.processor,
+                      mobile.cpu.length > 8
+                          ? mobile.cpu.substring(0, 8)
+                          : mobile.cpu,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -314,6 +329,7 @@ class SpecDetailsItem extends StatelessWidget {
             children: [
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     right: BorderSide(color: Colors.black45, width: 1.0),
@@ -343,7 +359,9 @@ class SpecDetailsItem extends StatelessWidget {
                           ),
                     ),
                     Text(
-                      '${mobile.batteryPower}mAh',
+                      mobile.batteryType.length > 10
+                          ? mobile.batteryType.substring(0, 10)
+                          : mobile.batteryType,
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
@@ -361,6 +379,7 @@ class SpecDetailsItem extends StatelessWidget {
               ),
               Container(
                 height: 60,
+                width: 150,
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black45, width: 1.0),
@@ -412,6 +431,7 @@ class SpecDetailsItem extends StatelessWidget {
             children: [
               Container(
                 height: 60,
+                width: 300,
                 color: Colors.white,
                 padding: const EdgeInsets.only(
                   left: 10,

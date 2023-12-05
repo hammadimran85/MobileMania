@@ -1,4 +1,4 @@
-import 'package:aboutmobiles/models/latest_mobiles.dart';
+import 'package:aboutmobiles/models/mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -6,8 +6,8 @@ class LatestMobilesItem extends StatelessWidget {
   const LatestMobilesItem(
       {super.key, required this.latestMobiles, required this.onSelectMobile});
 
-  final LatestMobiles latestMobiles;
-  final void Function(LatestMobiles latestMobiles) onSelectMobile;
+  final Mobile latestMobiles;
+  final void Function(Mobile latestMobiles) onSelectMobile;
 
   @override
   Widget build(BuildContext context) {
@@ -38,35 +38,23 @@ class LatestMobilesItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                latestMobiles.company,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 16,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.8),
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              Text(
-                latestMobiles.model,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 15,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.8),
-                      fontWeight: FontWeight.bold,
-                    ),
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  latestMobiles.name,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontSize: 16,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(0.8),
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),

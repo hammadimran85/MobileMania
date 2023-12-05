@@ -1,8 +1,11 @@
 import 'package:aboutmobiles/data/dummy_data.dart';
+import 'package:aboutmobiles/models/mobile.dart';
+import 'package:aboutmobiles/providers/latest_mobile_api_service.dart';
 import 'package:aboutmobiles/screens/battery_range_mobile_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BatterySlider extends StatefulWidget {
+class BatterySlider extends ConsumerStatefulWidget {
   const BatterySlider(
       {super.key,
       required this.minValue,
@@ -15,15 +18,15 @@ class BatterySlider extends StatefulWidget {
   final ValueChanged<double> onChanged;
 
   @override
-  State<BatterySlider> createState() => _BatterySliderState();
+  ConsumerState<BatterySlider> createState() => _BatterySliderState();
 }
 
-class _BatterySliderState extends State<BatterySlider> {
+class _BatterySliderState extends ConsumerState<BatterySlider> {
   RangeValues _currentRangeValues =
       const RangeValues(0, 6000); // Initial range 0 to 6000 mAh
-
   @override
   Widget build(BuildContext context) {
+    List<Mobile> dummyMobiles = ref.watch(mobileList);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

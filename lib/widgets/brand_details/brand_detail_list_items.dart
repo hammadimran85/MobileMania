@@ -45,7 +45,7 @@ class BrandDetailItems extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
-                      '${mobile.brand} ${mobile.model} ${mobile.memory}GB ',
+                      '${mobile.name.length > 16 ? mobile.name.substring(0, 16) : mobile.name} ${mobile.internalMemory.length > 6 ? mobile.internalMemory.substring(0, 6) : mobile.internalMemory} ',
                       maxLines: 1,
                       softWrap: true,
                       textAlign: TextAlign.left,
@@ -61,7 +61,7 @@ class BrandDetailItems extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${mobile.ram} GB Ram,  ${mobile.frontCameraPixels}MP Camera, ${mobile.screenSize} Inch,',
+                    '${mobile.internalMemory.length > 6 ? mobile.internalMemory.substring(0, 6) : mobile.internalMemory},  ${mobile.featuresOfCamera.split(" ")[0].length > 6 ? mobile.featuresOfCamera.split(" ")[0].substring(0, 6) : mobile.featuresOfCamera.split(" ")[0]} MP, ${mobile.dimensions.length > 6 ? mobile.dimensions.substring(0, 6) : mobile.dimensions} ,',
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     softWrap: true,

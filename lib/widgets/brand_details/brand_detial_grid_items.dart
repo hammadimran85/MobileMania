@@ -35,7 +35,7 @@ class BrandDetailGridItems extends StatelessWidget {
               ),
             ),
             Text(
-              '${mobile.brand} ${mobile.model}',
+              '${mobile.manufacturerName} ${mobile.name}',
               maxLines: 1,
               softWrap: true,
               textAlign: TextAlign.left,

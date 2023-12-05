@@ -1,6 +1,7 @@
 import 'package:aboutmobiles/models/video_reviews.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoReviewItems extends StatelessWidget {
   const VideoReviewItems({super.key, required this.videoReviews});
@@ -9,6 +10,13 @@ class VideoReviewItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> launchYoutube(url) async {
+      final Uri uri = Uri.parse(url);
+      if (!await launchUrl(uri)) {
+        throw Exception('Could not launch $url');
+      }
+    }
+
     return SizedBox(
       width: 190,
       child: Card(
@@ -23,7 +31,9 @@ class VideoReviewItems extends StatelessWidget {
         elevation: 0,
         child: InkWell(
           autofocus: true,
-          onTap: () {},
+          onTap: () {
+            launchYoutube(videoReviews.videoUrl);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -32,7 +42,7 @@ class VideoReviewItems extends StatelessWidget {
                 child: Stack(children: [
                   FadeInImage(
                     placeholder: MemoryImage(kTransparentImage),
-                    image: AssetImage(videoReviews.thumbnailUrl),
+                    image: NetworkImage(videoReviews.thumbnailUrl),
                     width: 190,
                     height: 100,
                     fit: BoxFit.cover,
@@ -44,7 +54,7 @@ class VideoReviewItems extends StatelessWidget {
                         padding: const EdgeInsets.all(4),
                         color: Colors.black54,
                         child: Text(
-                          videoReviews.minutes,
+                          videoReviews.channelTitle.substring(0, 5),
                           maxLines: 1,
                           textAlign: TextAlign.start,
                           softWrap: true,
@@ -63,7 +73,7 @@ class VideoReviewItems extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                videoReviews.phoneName,
+                videoReviews.title.substring(0, 15),
                 maxLines: 1,
                 textAlign: TextAlign.start,
                 softWrap: true,

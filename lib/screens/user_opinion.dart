@@ -1,4 +1,5 @@
 import 'package:aboutmobiles/models/latest_mobiles.dart';
+import 'package:aboutmobiles/models/mobile.dart';
 import 'package:aboutmobiles/models/user_opinion_model.dart';
 import 'package:aboutmobiles/widgets/specification.dart/specification_header.dart';
 import 'package:aboutmobiles/widgets/user_opinions/user_opinions_item.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 class UserOpinion extends StatelessWidget {
   const UserOpinion({super.key, required this.mobile, required this.opinions});
 
-  final LatestMobiles mobile;
+  final Mobile mobile;
   final List<UserOpinionModel> opinions;
 
   @override

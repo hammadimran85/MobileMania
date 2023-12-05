@@ -26,7 +26,7 @@ class BrandCategoryItems extends StatelessWidget {
                 child: FadeInImage(
                   fit: BoxFit.cover,
                   placeholder: MemoryImage(kTransparentImage),
-                  image: AssetImage(brand.bgImageUrl),
+                  image: const AssetImage('assets/images/brandBg.jpg'),
                   height: double.infinity,
                 ),
               ),
@@ -39,19 +39,25 @@ class BrandCategoryItems extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    brand.title,
-                    maxLines: 1,
-                    softWrap: true,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontSize: 22,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary
-                              .withOpacity(0.9),
-                        ),
+                  SizedBox(
+                    width: 120,
+                    height: double.infinity,
+                    child: Center(
+                      child: Text(
+                        brand.title,
+                        maxLines: 2,
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              fontSize: 20,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimary
+                                  .withOpacity(0.9),
+                            ),
+                      ),
+                    ),
                   ),
                   Icon(
                     Icons.navigate_next,

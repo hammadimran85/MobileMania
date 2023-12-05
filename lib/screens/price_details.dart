@@ -39,9 +39,8 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
 
       if (_showLatestOnly) {
         // Show only the latest mobiles with category "latestmobile"
-        List<Mobile> filteredMobiles = _originalMobileList
-            .where((mobile) => mobile.category == 'latestmobile')
-            .toList();
+        List<Mobile> filteredMobiles =
+            _originalMobileList.where((mobile) => mobile.isLatest).toList();
         widget.mobile.clear();
         widget.mobile.addAll(filteredMobiles);
       } else {
@@ -172,23 +171,23 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
       if (_showLatestOnly) {
         // Sort the list of mobiles based on the mobile name (A-Z)
         widget.mobile.sort((a, b) {
-          return a.brand.compareTo(b.brand);
+          return a.manufacturerName.compareTo(b.manufacturerName);
         });
       } else {
         if (ascending) {
           // Sort the list of mobiles based on the mobile name (A-Z)
           widget.mobile.sort((a, b) {
-            return a.brand.compareTo(b.brand);
+            return a.manufacturerName.compareTo(b.manufacturerName);
           });
         } else if (descending) {
           // Sort the list of mobiles based on the mobile name (Z-A)
           widget.mobile.sort((a, b) {
-            return b.brand.compareTo(a.brand);
+            return b.manufacturerName.compareTo(a.manufacturerName);
           });
         } else if (priceLow) {
           widget.mobile.sort((a, b) {
-            int aPrice = extractNumber(a.price);
-            int bPrice = extractNumber(b.price);
+            int aPrice = a.price.toInt();
+            int bPrice = b.price.toInt();
             return aPrice.compareTo(bPrice);
           });
         }
@@ -196,8 +195,8 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
 // Add sorting based on price (High to Low)
         else if (priceHigh) {
           widget.mobile.sort((a, b) {
-            int aPrice = extractNumber(a.price);
-            int bPrice = extractNumber(b.price);
+            int aPrice = a.price.toInt();
+            int bPrice = b.price.toInt();
             return bPrice.compareTo(aPrice);
           });
         }
@@ -212,17 +211,17 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
       child: ListView.builder(
         itemCount: widget.mobile
             .where((mobile) => widget.endingPrice < 99000
-                ? extractNumber(mobile.price) >= widget.staringPrice &&
-                    extractNumber(mobile.price) <= widget.endingPrice
-                : extractNumber(mobile.price) >= widget.staringPrice)
+                ? mobile.price >= widget.staringPrice &&
+                    mobile.price <= widget.endingPrice
+                : mobile.price >= widget.staringPrice)
             .toList()
             .length,
         itemBuilder: (ctx, index) => BrandDetailItems(
           mobile: widget.mobile
               .where((mobile) => widget.endingPrice < 99000
-                  ? extractNumber(mobile.price) >= widget.staringPrice &&
-                      extractNumber(mobile.price) <= widget.endingPrice
-                  : extractNumber(mobile.price) >= widget.staringPrice)
+                  ? mobile.price >= widget.staringPrice &&
+                      mobile.price <= widget.endingPrice
+                  : mobile.price >= widget.staringPrice)
               .toList()[index],
         ),
       ),
@@ -236,17 +235,17 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
         ),
         itemCount: widget.mobile
             .where((mobile) => widget.endingPrice < 99000
-                ? extractNumber(mobile.price) >= widget.staringPrice &&
-                    extractNumber(mobile.price) <= widget.endingPrice
-                : extractNumber(mobile.price) >= widget.staringPrice)
+                ? mobile.price >= widget.staringPrice &&
+                    mobile.price <= widget.endingPrice
+                : mobile.price >= widget.staringPrice)
             .toList()
             .length,
         itemBuilder: (ctx, index) => BrandDetailGridItems(
           mobile: widget.mobile
               .where((mobile) => widget.endingPrice < 99000
-                  ? extractNumber(mobile.price) >= widget.staringPrice &&
-                      extractNumber(mobile.price) <= widget.endingPrice
-                  : extractNumber(mobile.price) >= widget.staringPrice)
+                  ? mobile.price >= widget.staringPrice &&
+                      mobile.price <= widget.endingPrice
+                  : mobile.price >= widget.staringPrice)
               .toList()[index],
         ),
       ),
@@ -255,7 +254,7 @@ class _PriceDetailScreenState extends State<PriceDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Samsung',
+          'Price Range',
           softWrap: true,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(

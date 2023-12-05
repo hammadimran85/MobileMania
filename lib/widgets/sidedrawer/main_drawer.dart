@@ -90,40 +90,6 @@ class MainDrawer extends StatelessWidget {
                   ),
                   ListTile(
                     leading: Icon(
-                      Icons.newspaper,
-                      size: 26,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    title: Text(
-                      'News',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: 20,
-                          ),
-                    ),
-                    onTap: () {
-                      onSelectScreen('news');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.rate_review_sharp,
-                      size: 26,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    title: Text(
-                      'Reviews',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: 20,
-                          ),
-                    ),
-                    onTap: () {
-                      onSelectScreen('reviews');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
                       Icons.video_collection,
                       size: 26,
                       color: Theme.of(context).colorScheme.onPrimary,
@@ -137,23 +103,6 @@ class MainDrawer extends StatelessWidget {
                     ),
                     onTap: () {
                       onSelectScreen('video_reviews');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.notifications_active,
-                      size: 26,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    title: Text(
-                      'Latest Alerts',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: 20,
-                          ),
-                    ),
-                    onTap: () {
-                      onSelectScreen('latest_alerts');
                     },
                   ),
                   Container(
@@ -200,23 +149,6 @@ class MainDrawer extends StatelessWidget {
                     ),
                     onTap: () {
                       onSelectScreen('share');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.feedback,
-                      size: 26,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    title: Text(
-                      'Feedback',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontSize: 20,
-                          ),
-                    ),
-                    onTap: () {
-                      onSelectScreen('feedback');
                     },
                   ),
                 ],

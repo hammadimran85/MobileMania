@@ -1,16 +1,14 @@
-import 'package:aboutmobiles/models/mobile.dart';
 import 'package:aboutmobiles/models/price_category.dart';
 import 'package:flutter/material.dart';
 
 class PriceCategoryItems extends StatelessWidget {
-  const PriceCategoryItems(
-      {super.key,
-      required this.price,
-      required this.onSelectPrice,
-      required this.mobile});
+  const PriceCategoryItems({
+    super.key,
+    required this.price,
+    required this.onSelectPrice,
+  });
 
   final Price price;
-  final Mobile mobile;
   final void Function(Price price) onSelectPrice;
 
   @override

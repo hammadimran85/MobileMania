@@ -1,10 +1,12 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:aboutmobiles/data/dummy_data.dart';
+import 'package:aboutmobiles/models/brands.dart';
 import 'package:aboutmobiles/models/mobile.dart';
 import 'package:aboutmobiles/models/price_category.dart';
 import 'package:aboutmobiles/models/user_opinion_model.dart';
 import 'package:aboutmobiles/models/video_reviews.dart';
+// import 'package:aboutmobiles/providers/latest_mobile_api_service.dart';
 import 'package:aboutmobiles/screens/brands_detail.dart';
 import 'package:aboutmobiles/screens/features_detail.dart';
 import 'package:aboutmobiles/screens/latest_mobile_details.dart';
@@ -19,8 +21,9 @@ import 'package:aboutmobiles/widgets/home/latest_mobiles_item.dart';
 import 'package:aboutmobiles/models/features.dart';
 import 'package:aboutmobiles/models/latest_mobiles.dart';
 import 'package:aboutmobiles/widgets/home/brand_items.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MobileCategories extends StatefulWidget {
+class MobileCategories extends ConsumerStatefulWidget {
   const MobileCategories({
     super.key,
     required this.latestmobiles,
@@ -29,6 +32,7 @@ class MobileCategories extends StatefulWidget {
     required this.price,
     required this.videos,
     required this.opinions,
+    required this.brand,
   });
 
   final List<LatestMobiles> latestmobiles;
@@ -37,17 +41,18 @@ class MobileCategories extends StatefulWidget {
   final List<Price> price;
   final List<VideoReviews> videos;
   final List<UserOpinionModel> opinions;
+  final List<Brand> brand;
 
   @override
-  State<MobileCategories> createState() => _MobileCategoriesState();
+  ConsumerState<MobileCategories> createState() => _MobileCategoriesState();
 }
 
-class _MobileCategoriesState extends State<MobileCategories> {
-  void selectMobile(BuildContext context, LatestMobiles latestMobiles) {
+class _MobileCategoriesState extends ConsumerState<MobileCategories> {
+  void selectMobile(BuildContext context, Mobile latestMobiles) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: ((context) => LatestMobileDetailsScreen(
             mobile: latestMobiles,
-            videos: dummyVideoReviews,
+            videos: widget.videos,
             opinions: widget.opinions,
           )),
     ));
@@ -56,7 +61,7 @@ class _MobileCategoriesState extends State<MobileCategories> {
   void selectBrand(BuildContext context, Mobile mobile, String brand) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: ((context) => BrandsDetailScreen(
-            mobile: dummyMobiles,
+            mobile: widget.mobile,
             brandName: brand,
           )),
     ));
@@ -66,7 +71,7 @@ class _MobileCategoriesState extends State<MobileCategories> {
       BuildContext context, Price price, int startingPrice, int endingPrice) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: ((context) => PriceDetailScreen(
-            mobile: dummyMobiles,
+            mobile: widget.mobile,
             staringPrice: startingPrice,
             endingPrice: endingPrice,
           )),
@@ -76,93 +81,6 @@ class _MobileCategoriesState extends State<MobileCategories> {
   @override
   Widget build(BuildContext context) {
     int _selectedValue = 0;
-    final Map<int, String> androidVersions = {
-      0: 'All',
-      1: 'Android 14',
-      2: 'Android 13',
-      3: 'Android 12',
-      4: 'Android 11',
-      5: 'Android 10',
-      6: 'Pie',
-      7: 'Oreo',
-      8: 'Nougat',
-      9: 'Marshmallow',
-      10: 'Android One',
-      // Add more versions as needed
-    };
-
-    final Map<int, String> ramTypes = {
-      0: 'All',
-      1: '512MB',
-      2: '2GB',
-      3: '3GB',
-      4: '4GB',
-      5: '6GB',
-      6: '8GB',
-      7: '12GB & Above',
-      // Add more versions as needed
-    };
-
-    final Map<int, String> screenTypes = {
-      0: 'All',
-      1: 'Less than 3 inch',
-      2: '3.0 Inch - 4.1 Inch',
-      3: '4.1 Inch - 4.9 Inch',
-      4: '5.0 Inch - 6.9 Inch',
-      5: '7.0 Inch - 8.9 Inch',
-      // Add more versions as needed
-    };
-
-    final Map<int, String> processorTypes = {
-      0: 'All',
-      1: 'Single Core',
-      2: 'Dual Core',
-      3: 'Qaud Core',
-      4: 'Hexa Core',
-      5: 'Octa Core',
-      // Add more versions as needed
-    };
-
-    final Map<int, String> cameraTypes = {
-      0: 'All',
-      1: '1 MP',
-      2: '2 MP',
-      3: '3 MP',
-      4: '4 MP',
-      5: '5 MP',
-      6: '6 MP',
-      7: '7 MP',
-      8: '8 MP',
-      9: '9 MP',
-      10: '10 MP',
-      11: '11 MP',
-      12: '12 MP',
-      13: '13 MP',
-      14: '14 MP',
-      15: '15 MP',
-      16: '16 MP',
-      17: '17 MP',
-      18: '18 MP',
-      19: '19 MP',
-      20: '20 MP',
-      21: '21 MP',
-      22: '23 MP',
-      23: '24 MP',
-      24: '25 MP',
-      25: '27 MP',
-      26: '32 MP',
-      27: '40 MP',
-      28: '41 MP',
-      29: '48 MP',
-      30: '50 MP',
-      31: '52 MP',
-      32: '54 MP',
-      33: '64 MP',
-      34: '100 MP',
-      35: '108 MP',
-      36: '200 MP',
-      // Add more versions as needed
-    };
 
     void _showDialog(BuildContext context, String title, Map<int, String> map) {
       showDialog(
@@ -279,9 +197,9 @@ class _MobileCategoriesState extends State<MobileCategories> {
         SizedBox(
           height: 165,
           child: ListView.builder(
-            itemCount: widget.latestmobiles.length,
+            itemCount: widget.mobile.length,
             itemBuilder: (ctx, index) => LatestMobilesItem(
-              latestMobiles: widget.latestmobiles[index],
+              latestMobiles: widget.mobile[index],
               onSelectMobile: (latestMobiles) {
                 selectMobile(context, latestMobiles);
               },
@@ -305,11 +223,13 @@ class _MobileCategoriesState extends State<MobileCategories> {
         SizedBox(
           height: 120,
           child: ListView.builder(
-              itemCount: widget.mobile.length,
+              itemCount: widget.brand.length,
               itemBuilder: (ctx, index) => BrandItems(
-                    mobile: widget.mobile[index],
+                    index: index,
+                    brand: widget.brand[index],
+                    mobile: widget.mobile[0],
                     onSelectBrand: (mobile) {
-                      selectBrand(context, mobile, mobile.brand);
+                      selectBrand(context, mobile, mobile.manufacturerName);
                     },
                   ),
               scrollDirection: Axis.horizontal),
@@ -482,7 +402,6 @@ class _MobileCategoriesState extends State<MobileCategories> {
           child: ListView.builder(
             itemCount: widget.price.length,
             itemBuilder: (ctx, index) => PriceCategoryItems(
-              mobile: widget.mobile[1],
               price: widget.price[index],
               onSelectPrice: (price) {
                 selectPrice(
